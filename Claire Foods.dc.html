@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:#FBF8F2;}
+::selection{background:#E51C8D;color:#fff;}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+@keyframes floaty2{0%,100%{transform:translateY(0)}50%{transform:translateY(14px)}}
+@keyframes swirl{to{transform:rotate(360deg)}}
+@keyframes swirlrev{to{transform:rotate(-360deg)}}
+@keyframes blob{0%,100%{border-radius:42% 58% 60% 40%/52% 44% 56% 48%}50%{border-radius:58% 42% 38% 62%/46% 58% 42% 54%}}
+@keyframes pulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.05)}}
+@keyframes fall{0%{transform:translate(-50%,-12px) scale(.6);opacity:0}18%{opacity:1}82%{opacity:1}100%{transform:translate(-50%,128px) scale(.32);opacity:0}}
+@keyframes dissolve{0%,100%{transform:translate(-50%,-50%) scale(.45);opacity:.08}50%{transform:translate(-50%,-50%) scale(1.25);opacity:.6}}
+@keyframes steam{0%{transform:translateX(-50%) translateY(0) scaleX(1);opacity:0}25%{opacity:.5}100%{transform:translateX(-50%) translateY(-46px) scaleX(1.7);opacity:0}}
+@keyframes revealUp{from{opacity:0;transform:translateY(115%)}to{opacity:1;transform:translateY(0)}}
+@keyframes modalIn{from{opacity:0}to{opacity:1}}
+@keyframes modalPop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media (max-width:820px){
+  [data-navlinks]{display:none !important;}
+  [data-herogrid]{grid-template-columns:1fr !important;gap:36px !important;}
+  [data-storygrid]{grid-template-columns:1fr !important;gap:32px !important;}
+  [data-footergrid]{grid-template-columns:1fr !important;gap:32px !important;}
+  [data-metrics]{grid-template-columns:1fr !important;}
+  [data-herostage]{max-width:380px !important;}
+}
+@media (max-width:560px){
+  [data-formrow]{grid-template-columns:1fr !important;}
+  [data-herostage]{max-width:300px !important;}
+}
+</style>
+</helmet>
+
+<div style="font-family:'Hanken Grotesk',system-ui,sans-serif;color:#2A1A12;background:#FBF8F2;overflow-x:hidden;-webkit-font-smoothing:antialiased;">
+
+<!-- ===================== NAV ===================== -->
+<header style="position:sticky;top:0;z-index:60;backdrop-filter:saturate(1.4) blur(14px);background:rgba(251,248,242,0.78);border-bottom:1px solid rgba(42,26,18,0.07);">
+  <nav style="max-width:1240px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;">
+    <a href="#top" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:#2A1A12;">
+      <img src="assets/claire-logo.png" alt="Claire Foods" style="width:38px;height:38px;display:block;">
+      <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.02em;">Claire Foods</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:30px;font-size:15px;font-weight:600;" data-navlinks="">
+      <a href="#concept" style="text-decoration:none;color:#5A4A40;transition:color .2s;" style-hover="color:#E51C8D">Concept</a>
+      <a href="#benefits" style="text-decoration:none;color:#5A4A40;transition:color .2s;" style-hover="color:#E51C8D">Benefits</a>
+      <a href="#survey" style="text-decoration:none;color:#5A4A40;transition:color .2s;" style-hover="color:#E51C8D">Survey</a>
+      <a href="#community" style="text-decoration:none;color:#5A4A40;transition:color .2s;" style-hover="color:#E51C8D">Community</a>
+      <a href="#faq" style="text-decoration:none;color:#5A4A40;transition:color .2s;" style-hover="color:#E51C8D">FAQ</a>
+    </div>
+    <a href="#waitlist" data-magnetic="" style="display:inline-flex;align-items:center;background:#E51C8D;color:#fff;text-decoration:none;font-weight:700;font-size:15px;padding:11px 20px;border-radius:999px;box-shadow:0 6px 18px rgba(229,28,141,0.32);transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-2px);box-shadow:0 10px 26px rgba(229,28,141,0.42)">Join the Waitlist</a>
+  </nav>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section id="top" style="position:relative;overflow:hidden;padding:clamp(48px,7vw,96px) 28px clamp(56px,7vw,104px);">
+  <!-- background blobs (parallax) -->
+  <div data-parallax="0.12" style="position:absolute;top:-160px;right:-120px;width:560px;height:560px;background:radial-gradient(circle at 35% 35%,#FF4FB0,#E51C8D 55%,#B30E6E);filter:blur(2px);opacity:0.16;border-radius:50%;pointer-events:none;"></div>
+  <div data-parallax="0.06" style="position:absolute;bottom:-180px;left:-140px;width:520px;height:520px;background:radial-gradient(circle at 50% 50%,#A9DB5A,#7FB935 60%,#5C8F22);opacity:0.14;border-radius:50%;pointer-events:none;"></div>
+
+  <div style="position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center;" data-herogrid="">
+    <!-- copy -->
+    <div>
+      <div style="display:inline-flex;align-items:center;gap:9px;background:rgba(229,28,141,0.08);border:1px solid rgba(229,28,141,0.2);color:#C8147A;font-weight:700;font-size:13px;letter-spacing:0.04em;text-transform:uppercase;padding:8px 15px;border-radius:999px;margin-bottom:24px;">
+        <span style="width:7px;height:7px;border-radius:50%;background:#E51C8D;display:inline-block;animation:pulse 2.4s ease-in-out infinite;"></span>
+        Concept in validation · Help shape it
+      </div>
+      <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,6vw,76px);line-height:0.98;letter-spacing:-0.03em;margin:0 0 22px;max-width:15ch;text-wrap:balance;"><span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.05s;">What</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.12s;">if</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.19s;">your</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.26s;">coffee</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.33s;">creamer</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.40s;">actually</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;color:#E51C8D;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.47s;">added</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.1em;margin-bottom:-0.1em;"><span data-reveal-word="" style="display:inline-block;color:#E51C8D;animation:revealUp .75s cubic-bezier(.22,1,.36,1) both;animation-delay:.54s;">nutrition?</span></span></h1>
+      <p style="font-size:clamp(17px,1.5vw,20px);line-height:1.55;color:#5A4A40;max-width:52ch;margin:0 0 32px;">We're exploring a Canadian-made plant-based powdered coffee creamer with meaningful protein and exceptional taste. Just scoop, stir, and go. Join our early-access community and help shape what comes next.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-bottom:30px;">
+        <a href="#waitlist" data-magnetic="" style="display:inline-flex;align-items:center;gap:9px;background:#E51C8D;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:15px 28px;border-radius:999px;box-shadow:0 10px 26px rgba(229,28,141,0.34);transition:transform .2s,box-shadow .2s;" style-hover="transform:translateY(-2px);box-shadow:0 14px 32px rgba(229,28,141,0.46)">Join the Waitlist →</a>
+        <a href="#survey" data-magnetic="" style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:#2A1A12;text-decoration:none;font-weight:700;font-size:16px;padding:15px 26px;border-radius:999px;border:1.5px solid rgba(42,26,18,0.18);transition:border-color .2s,background .2s;" style-hover="border-color:#E51C8D;background:rgba(229,28,141,0.05)">Take the Survey</a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:18px 26px;">
+        <div style="display:flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;color:#3A2A20;"><span style="width:20px;height:20px;border-radius:50%;background:#7FB935;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;">✓</span>Canadian Innovation</div>
+        <div style="display:flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;color:#3A2A20;"><span style="width:20px;height:20px;border-radius:50%;background:#7FB935;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;">✓</span>Plant-Based</div>
+        <div style="display:flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;color:#3A2A20;"><span style="width:20px;height:20px;border-radius:50%;background:#7FB935;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;">✓</span>High-Protein Concept</div>
+        <div style="display:flex;align-items:center;gap:9px;font-weight:600;font-size:14.5px;color:#3A2A20;"><span style="width:20px;height:20px;border-radius:50%;background:#7FB935;color:#fff;font-size:12px;display:inline-flex;align-items:center;justify-content:center;">✓</span>Customer Driven</div>
+      </div>
+    </div>
+
+    <!-- abstract logo-inspired hero stage -->
+    <div style="position:relative;aspect-ratio:1/1;width:100%;max-width:520px;margin:0 auto;" data-herostage="">
+      <!-- big soft magenta blob -->
+      <div style="position:absolute;inset:8% 8% 8% 8%;background:radial-gradient(circle at 38% 32%,#FF66BC,#E51C8D 58%,#C0107A);box-shadow:0 40px 80px -28px rgba(229,28,141,0.5);animation:blob 16s ease-in-out infinite;"></div>
+      <!-- rotating swirl ring (coffee swirl) -->
+      <div style="position:absolute;inset:2%;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,0.55),transparent 40%,rgba(255,255,255,0.2),transparent 70%);mask:radial-gradient(circle,transparent 60%,#000 61%);-webkit-mask:radial-gradient(circle,transparent 60%,#000 61%);animation:swirl 22s linear infinite;opacity:0.7;"></div>
+      <!-- green leaves echoing logo -->
+      <div style="position:absolute;bottom:6%;left:2%;width:42%;height:42%;background:linear-gradient(135deg,#A9DB5A,#6FA82B);border-radius:0 100% 0 100%;transform:rotate(-8deg);box-shadow:0 18px 36px -16px rgba(111,168,43,0.6);animation:floaty2 7s ease-in-out infinite;"></div>
+      <div style="position:absolute;bottom:6%;right:2%;width:42%;height:42%;background:linear-gradient(225deg,#A9DB5A,#6FA82B);border-radius:100% 0 100% 0;transform:rotate(8deg);box-shadow:0 18px 36px -16px rgba(111,168,43,0.6);animation:floaty 8s ease-in-out infinite;"></div>
+      <!-- center logo mark -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:34%;height:34%;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 22px 50px -16px rgba(42,26,18,0.45);">
+        <img src="assets/claire-logo.png" alt="" style="width:64%;height:64%;object-fit:contain;">
+      </div>
+      <!-- floating info chips -->
+      <div style="position:absolute;top:4%;left:-4%;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 14px 30px -12px rgba(42,26,18,0.32);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;animation:floaty 6s ease-in-out infinite;"><span style="color:#E51C8D;font-family:'Bricolage Grotesque',sans-serif;font-size:18px;">{{ proteinLabel }}</span> protein*</div>
+      <div style="position:absolute;top:30%;right:-7%;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 14px 30px -12px rgba(42,26,18,0.32);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;animation:floaty2 7.5s ease-in-out infinite;"><span style="width:9px;height:9px;border-radius:50%;background:#7FB935;"></span> Plant-based</div>
+      <div style="position:absolute;bottom:14%;left:-6%;background:#fff;border-radius:14px;padding:10px 14px;box-shadow:0 14px 30px -12px rgba(42,26,18,0.32);font-weight:700;font-size:14px;display:flex;align-items:center;gap:8px;animation:floaty2 6.8s ease-in-out infinite;">Scoopable powder</div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:#A99F92;margin:40px 0 0;">*Target concept attributes shown for illustration. Final specs guided by your feedback.</p>
+</section>
+
+<!-- ===================== PROBLEM ===================== -->
+<section style="background:#fff;padding:clamp(64px,8vw,110px) 28px;border-top:1px solid rgba(42,26,18,0.05);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;max-width:760px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#E51C8D;margin-bottom:16px;">The problem</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,54px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 18px;">Most creamers add calories. Not much else.</h2>
+      <p style="font-size:18px;line-height:1.6;color:#5A4A40;margin:0;">The thing you stir into coffee every single morning is mostly a missed opportunity. We looked at what's actually in the tub — and what isn't.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin-top:44px;">
+      <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:.04s;background:#FBF8F2;border-radius:18px;padding:24px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;color:#E51C8D;font-weight:800;margin-bottom:8px;">✕</div><div style="font-weight:700;font-size:17px;margin-bottom:6px;">Added sugars</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">A spoonful of dessert hiding in plain sight.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:.1s;background:#FBF8F2;border-radius:18px;padding:24px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;color:#E51C8D;font-weight:800;margin-bottom:8px;">✕</div><div style="font-weight:700;font-size:17px;margin-bottom:6px;">Empty calories</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Calories that do nothing for your day.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:.16s;background:#FBF8F2;border-radius:18px;padding:24px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;color:#E51C8D;font-weight:800;margin-bottom:8px;">✕</div><div style="font-weight:700;font-size:17px;margin-bottom:6px;">Artificial ingredients</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Words you can't pronounce.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:.22s;background:#FBF8F2;border-radius:18px;padding:24px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;color:#E51C8D;font-weight:800;margin-bottom:8px;">✕</div><div style="font-weight:700;font-size:17px;margin-bottom:6px;">No nutritional value</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Zero protein. Zero function. Just beige.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;transition-delay:.28s;background:#FBF8F2;border-radius:18px;padding:24px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-size:30px;color:#E51C8D;font-weight:800;margin-bottom:8px;">✕</div><div style="font-weight:700;font-size:17px;margin-bottom:6px;">Dairy concerns</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Lactose, footprint, and morning regret.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONCEPT ===================== -->
+<section id="concept" style="scroll-margin-top:90px;background:#F3EBDD;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;text-align:center;max-width:720px;margin:0 auto 50px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#7FB935;margin-bottom:16px;">The concept</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,56px);line-height:1.02;letter-spacing:-0.02em;margin:0 0 16px;">A better morning ritual.</h2>
+      <p style="font-size:18px;line-height:1.6;color:#5A4A40;margin:0;">Imagine the same creamy coffee you love — quietly working harder for you. Here's what we're exploring, and where we'd love your input.</p>
+    </div>
+    <div data-tiltgroup="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;">
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(229,28,141,0.1);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:20px;margin-bottom:16px;">P</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">High protein</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Meaningful protein folded into a habit you already have.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.05s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(229,28,141,0.1);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:20px;margin-bottom:16px;">C</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Rich creamy texture</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Dissolves smooth into coffee for a velvety body — no clumps, no watery letdown.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.1s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(127,185,53,0.16);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#6FA82B;font-size:20px;margin-bottom:16px;">🌱</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Plant-based</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">100% dairy-free, built on clean plant proteins.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.15s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(127,185,53,0.16);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#6FA82B;font-size:20px;margin-bottom:16px;">L</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Low sugar</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">The richness, without the dessert-in-disguise.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.2s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(229,28,141,0.1);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:20px;margin-bottom:16px;">★</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Great taste</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">The non-negotiable. If it isn't delicious, it doesn't ship.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.25s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(127,185,53,0.16);display:flex;align-items:center;justify-content:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#6FA82B;font-size:20px;margin-bottom:16px;">♺</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Sustainable sourcing</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">A lighter footprint than the dairy default.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.32s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(127,185,53,0.16);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;">🥄</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Convenient powder format</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">A scoopable powder — easy to store, and light enough to toss in your bag for the office or the trail.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.3s;background:#fff;border-radius:20px;padding:26px;border:1px solid rgba(42,26,18,0.05);"><div style="width:44px;height:44px;border-radius:12px;background:rgba(229,28,141,0.1);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;">🍁</div><div style="font-weight:700;font-size:18px;margin-bottom:6px;">Canadian-made</div><div style="font-size:14.5px;color:#6A5A50;line-height:1.5;">Developed in Canada, with Canadian coffee drinkers.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.35s;background:linear-gradient(135deg,#E51C8D,#C0107A);border-radius:20px;padding:26px;color:#fff;display:flex;flex-direction:column;justify-content:center;"><div style="font-weight:700;font-size:18px;margin-bottom:8px;">Shape it with us →</div><div style="font-size:14.5px;line-height:1.5;opacity:0.92;">Cast your votes below and tell us what matters most.</div></div>
+    </div>
+    <div data-reveal="" style="opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease;margin-top:34px;display:flex;align-items:center;gap:12px;justify-content:center;font-size:14px;color:#8A7A6E;background:rgba(255,255,255,0.6);border:1px dashed rgba(42,26,18,0.18);border-radius:14px;padding:14px 20px;max-width:680px;margin-left:auto;margin-right:auto;text-align:center;">
+      <span style="font-size:16px;">ⓘ</span> Final product specifications will be influenced by customer feedback.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CUSTOMER INPUT / MATTERS POLL ===================== -->
+<section id="survey" style="scroll-margin-top:90px;background:#fff;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;text-align:center;max-width:680px;margin:0 auto 14px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#E51C8D;margin-bottom:16px;">We want your input</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,54px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 14px;">What matters most in a coffee creamer?</h2>
+      <p style="font-size:17px;line-height:1.6;color:#5A4A40;margin:0;">Tap your pick. Results update live — and directly inform what we build first.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-top:40px;">
+      <sc-for list="{{ matters }}" as="opt" hint-placeholder-count="6">
+        <button type="button" data-tilt="" onClick="{{ opt.vote }}" style="position:relative;text-align:left;cursor: {{ opt.cardCursor }};border:1.5px solid rgba(42,26,18,0.1);background:#FBF8F2;border-radius:18px;padding:20px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;font-family:inherit;" style-hover="transform:translateY(-3px);box-shadow:0 14px 30px -14px rgba(42,26,18,0.3);border-color:rgba(229,28,141,0.45)">
+          <sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;background:#E51C8D;color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;z-index:2;">✓</span>
+          </sc-if>
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;position:relative;z-index:2;padding-right: {{ opt.headPad }};">
+            <span style="font-weight:700;font-size:18px;">{{ opt.label }}</span>
+            <sc-if value="{{ opt.voted }}" hint-placeholder-val="{{ false }}"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;color:#E51C8D;">{{ opt.pctStr }}</span></sc-if>
+          </div>
+          <div style="margin-top:14px;height:9px;border-radius:99px;background:rgba(42,26,18,0.08);overflow:hidden;position:relative;z-index:2;">
+            <div style="height:100%;width: {{ opt.fillWidth }};border-radius:99px;background:linear-gradient(90deg,#E51C8D,#FF66BC);transition:width .9s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+          <sc-if value="{{ opt.voted }}" hint-placeholder-val="{{ false }}"><div style="margin-top:9px;font-size:13px;color:#8A7A6E;position:relative;z-index:2;">{{ opt.count }} votes</div></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FLAVOR POLL ===================== -->
+<section style="background:#FBF8F2;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;text-align:center;max-width:680px;margin:0 auto 14px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#7FB935;margin-bottom:16px;">Flavor poll</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,54px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 14px;">Which flavor would you try first?</h2>
+      <p style="font-size:17px;line-height:1.6;color:#5A4A40;margin:0;">Pick one. The leaderboard reorders as the community votes.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-top:40px;">
+      <sc-for list="{{ flavors }}" as="opt" hint-placeholder-count="5">
+        <button type="button" data-tilt="" onClick="{{ opt.vote }}" style="position:relative;cursor: {{ opt.cardCursor }};border:1.5px solid rgba(42,26,18,0.1);background:#fff;border-radius:20px;padding:22px 20px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;font-family:inherit;display:flex;flex-direction:column;align-items:center;text-align:center;" style-hover="transform:translateY(-4px);box-shadow:0 16px 34px -14px rgba(42,26,18,0.3);border-color:rgba(229,28,141,0.45)">
+          <sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:12px;right:12px;width:22px;height:22px;border-radius:50%;background:#E51C8D;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;z-index:2;">✓</span>
+          </sc-if>
+          <div style="width:60px;height:60px;border-radius:50%;background: {{ opt.swatch }};box-shadow:inset 0 -6px 14px rgba(0,0,0,0.12),0 8px 18px -10px rgba(0,0,0,0.3);margin-bottom:14px;"></div>
+          <div style="font-weight:700;font-size:16.5px;margin-bottom:10px;">{{ opt.label }}</div>
+          <div style="width:100%;height:8px;border-radius:99px;background:rgba(42,26,18,0.08);overflow:hidden;">
+            <div style="height:100%;width: {{ opt.fillWidth }};border-radius:99px;background:linear-gradient(90deg,#7FB935,#A9DB5A);transition:width .9s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+          <sc-if value="{{ opt.voted }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px;font-size:13px;color:#8A7A6E;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;color:#2A1A12;">{{ opt.pctStr }}</span> · {{ opt.count }}</div></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PACKAGING ===================== -->
+<section style="background:#fff;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:1080px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;text-align:center;max-width:680px;margin:0 auto 14px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#E51C8D;margin-bottom:16px;">Packaging feedback</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,54px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 14px;">Help us choose.</h2>
+      <p style="font-size:17px;line-height:1.6;color:#5A4A40;margin:0;">Three early packaging directions. Which would you be most likely to buy?</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:40px;">
+      <sc-for list="{{ packs }}" as="opt" hint-placeholder-count="3">
+        <button type="button" data-tilt="" onClick="{{ opt.vote }}" style="position:relative;cursor: {{ opt.cardCursor }};border:1.5px solid rgba(42,26,18,0.1);background:#FBF8F2;border-radius:22px;padding:26px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;font-family:inherit;display:flex;flex-direction:column;align-items:center;" style-hover="transform:translateY(-4px);box-shadow:0 18px 38px -16px rgba(42,26,18,0.32);border-color:rgba(229,28,141,0.45)">
+          <sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}">
+            <span style="position:absolute;top:16px;right:16px;background:#E51C8D;color:#fff;font-size:12px;font-weight:700;padding:5px 11px;border-radius:99px;z-index:2;">✓ Your pick</span>
+          </sc-if>
+          <!-- package mock — distinct silhouette per format -->
+          <div style="width:100%;height:166px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:18px;">
+            <sc-if value="{{ opt.isTub }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;width:108px;height:150px;">
+                <div style="position:absolute;top:0;left:50%;transform:translateX(-50%);width:108px;height:26px;border-radius:12px;background: {{ opt.c2 }};box-shadow:inset 0 -4px 6px rgba(0,0,0,0.14),0 5px 9px -3px rgba(42,26,18,0.3);z-index:3;"></div>
+                <div style="position:absolute;top:23px;left:50%;transform:translateX(-50%);width:94px;height:8px;border-radius:0 0 5px 5px;background:rgba(0,0,0,0.16);z-index:1;"></div>
+                <div style="position:absolute;top:27px;left:50%;transform:translateX(-50%);width:92px;height:123px;border-radius:5px 5px 15px 15px;background: {{ opt.c1 }};overflow:hidden;box-shadow:0 16px 30px -14px rgba(42,26,18,0.45),inset -13px 0 22px rgba(0,0,0,0.18),inset 15px 0 18px rgba(255,255,255,0.18);">
+                  <div style="position:absolute;top:30%;left:0;right:0;height:54px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;box-shadow:0 1px 0 rgba(0,0,0,0.06),0 -1px 0 rgba(0,0,0,0.06);">
+                    <img src="assets/claire-logo.png" alt="" style="width:28px;height:28px;object-fit:contain;" />
+                    <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:8px;letter-spacing:0.04em;color:#E51C8D;">CLAIRE</span>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ opt.isPouch }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;width:106px;height:152px;">
+                <div style="position:absolute;top:0;left:13px;right:13px;height:15px;background:repeating-linear-gradient(90deg,rgba(42,26,18,0.20) 0 3px,rgba(42,26,18,0.06) 3px 6px);border-radius:3px;z-index:3;"></div>
+                <div style="position:absolute;top:4px;left:50%;transform:translateX(-50%);width:7px;height:7px;border-radius:50%;background:#FBF8F2;z-index:4;"></div>
+                <div style="position:absolute;top:11px;left:5px;right:5px;bottom:0;background: {{ opt.c1 }};clip-path:polygon(0 8%,16% 0,84% 0,100% 8%,100% 100%,0 100%);overflow:hidden;box-shadow:0 16px 30px -14px rgba(42,26,18,0.4),inset -14px 0 22px rgba(0,0,0,0.12),inset 14px 0 20px rgba(255,255,255,0.3);">
+                  <div style="position:absolute;bottom:0;left:0;right:0;height:20%;background:rgba(0,0,0,0.1);"></div>
+                  <div style="position:absolute;top:36%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 11px rgba(0,0,0,0.2);"><img src="assets/claire-logo.png" alt="" style="width:64%;height:64%;object-fit:contain;" /></div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ opt.isSachet }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;width:134px;height:150px;">
+                <div style="position:absolute;bottom:4px;left:50%;width:28px;height:126px;margin-left:-14px;transform-origin:bottom center;transform:rotate(-16deg);background: {{ opt.c1 }};border-radius:3px;overflow:hidden;box-shadow:0 12px 22px -12px rgba(0,0,0,0.55);">
+                  <div style="position:absolute;top:0;left:0;right:0;height:11px;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.22) 0 2px,rgba(255,255,255,0.04) 2px 4px);"></div>
+                  <div style="position:absolute;top:46%;left:0;right:0;height:8px;background: {{ opt.c2 }};"></div>
+                </div>
+                <div style="position:absolute;bottom:4px;left:50%;width:28px;height:126px;margin-left:-14px;transform-origin:bottom center;transform:rotate(16deg);background: {{ opt.c1 }};border-radius:3px;overflow:hidden;box-shadow:0 12px 22px -12px rgba(0,0,0,0.55);">
+                  <div style="position:absolute;top:0;left:0;right:0;height:11px;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.22) 0 2px,rgba(255,255,255,0.04) 2px 4px);"></div>
+                  <div style="position:absolute;top:46%;left:0;right:0;height:8px;background: {{ opt.c2 }};"></div>
+                </div>
+                <div style="position:absolute;bottom:4px;left:50%;width:32px;height:134px;margin-left:-16px;background: {{ opt.c1 }};border-radius:3px;overflow:hidden;box-shadow:0 14px 26px -12px rgba(0,0,0,0.6);z-index:2;">
+                  <div style="position:absolute;top:0;left:0;right:0;height:12px;background:repeating-linear-gradient(90deg,rgba(255,255,255,0.24) 0 2px,rgba(255,255,255,0.05) 2px 4px);"></div>
+                  <div style="position:absolute;top:42%;left:0;right:0;height:10px;background: {{ opt.c2 }};"></div>
+                  <div style="position:absolute;top:64%;left:50%;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 7px rgba(0,0,0,0.3);"><img src="assets/claire-logo.png" alt="" style="width:70%;height:70%;object-fit:contain;" /></div>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+          <div style="font-weight:800;font-size:18px;font-family:'Bricolage Grotesque',sans-serif;">{{ opt.label }}</div>
+          <div style="font-size:13.5px;color:#8A7A6E;margin:5px 0 14px;">{{ opt.sub }}</div>
+          <div style="width:100%;height:9px;border-radius:99px;background:rgba(42,26,18,0.08);overflow:hidden;">
+            <div style="height:100%;width: {{ opt.fillWidth }};border-radius:99px;background:linear-gradient(90deg,#E51C8D,#FF66BC);transition:width .9s cubic-bezier(.22,1,.36,1);"></div>
+          </div>
+          <sc-if value="{{ opt.voted }}" hint-placeholder-val="{{ false }}"><div style="margin-top:10px;font-size:13px;color:#8A7A6E;"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;color:#E51C8D;">{{ opt.pctStr }}</span> · {{ opt.count }} votes</div></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BENEFITS ===================== -->
+<section id="benefits" style="scroll-margin-top:90px;background:#F3EBDD;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:1180px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;max-width:720px;margin:0 0 50px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#7FB935;margin-bottom:16px;">Why it matters</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,56px);line-height:1.02;letter-spacing:-0.02em;margin:0;">Why this idea resonates.</h2>
+    </div>
+    <div data-tiltgroup="" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;">
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;background:#fff;border-radius:22px;padding:30px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:15px;margin-bottom:14px;">01</div><div style="font-weight:700;font-size:20px;margin-bottom:8px;">More nutrition from existing habits</div><div style="font-size:15px;color:#6A5A50;line-height:1.55;">No new routine to adopt. Just a smarter version of the cup you already make.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.05s;background:#fff;border-radius:22px;padding:30px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:15px;margin-bottom:14px;">02</div><div style="font-weight:700;font-size:20px;margin-bottom:8px;">Convenient protein intake</div><div style="font-size:15px;color:#6A5A50;line-height:1.55;">Protein that fits into the morning instead of competing with it.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.1s;background:#fff;border-radius:22px;padding:30px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#7FB935;font-size:15px;margin-bottom:14px;">03</div><div style="font-weight:700;font-size:20px;margin-bottom:8px;">Plant-based innovation</div><div style="font-size:15px;color:#6A5A50;line-height:1.55;">Modern food science applied to a category that's barely changed in decades.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.15s;background:#fff;border-radius:22px;padding:30px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:15px;margin-bottom:14px;">04</div><div style="font-weight:700;font-size:20px;margin-bottom:8px;">Better morning routines</div><div style="font-size:15px;color:#6A5A50;line-height:1.55;">Start the day with something that gives back, not just tastes good.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.2s;background:#fff;border-radius:22px;padding:30px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#7FB935;font-size:15px;margin-bottom:14px;">05</div><div style="font-weight:700;font-size:20px;margin-bottom:8px;">Sustainability</div><div style="font-size:15px;color:#6A5A50;line-height:1.55;">Plant proteins with a lighter footprint than the dairy status quo.</div></div>
+      <div data-reveal="" style="opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s ease;transition-delay:.25s;background:#fff;border-radius:22px;padding:30px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;color:#E51C8D;font-size:15px;margin-bottom:14px;">06</div><div style="font-weight:700;font-size:20px;margin-bottom:8px;">Canadian food innovation</div><div style="font-size:15px;color:#6A5A50;line-height:1.55;">Built here, with people here — proudly part of a new wave of Canadian brands.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMUNITY METRICS ===================== -->
+<section id="community" style="scroll-margin-top:90px;background:#1F140E;color:#fff;padding:clamp(64px,8vw,116px) 28px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-120px;right:-80px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,#E51C8D,transparent 70%);opacity:0.35;pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-140px;left:-90px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#7FB935,transparent 70%);opacity:0.28;pointer-events:none;"></div>
+  <div style="position:relative;max-width:1080px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;text-align:center;max-width:720px;margin:0 auto 18px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#FF66BC;margin-bottom:16px;">The community</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.6vw,56px);line-height:1.02;letter-spacing:-0.02em;margin:0 0 14px;">Join the early-access community.</h2>
+      <p style="font-size:17px;line-height:1.6;color:rgba(255,255,255,0.72);margin:0;">Members don't just wait for the product — they help decide what it becomes.</p>
+    </div>
+    <div data-metrics="" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:44px 0 50px;text-align:center;">
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;padding:34px 18px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1;color:#FF66BC;">{{ mWaitlist }}<span style="font-size:0.5em;">+</span></div><div style="margin-top:10px;font-size:14.5px;color:rgba(255,255,255,0.7);font-weight:600;letter-spacing:0.02em;">Waitlist members</div></div>
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;padding:34px 18px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1;color:#A9DB5A;">{{ mSurvey }}<span style="font-size:0.5em;">+</span></div><div style="margin-top:10px;font-size:14.5px;color:rgba(255,255,255,0.7);font-weight:600;letter-spacing:0.02em;">Survey responses</div></div>
+      <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:22px;padding:34px 18px;"><div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(36px,5vw,60px);line-height:1;color:#fff;">{{ mVotes }}<span style="font-size:0.5em;">+</span></div><div style="margin-top:10px;font-size:14.5px;color:rgba(255,255,255,0.7);font-weight:600;letter-spacing:0.02em;">Feature votes cast</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;">
+      <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:rgba(255,255,255,0.86);"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#7FB935;color:#1F140E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;">✓</span>Product development updates</div>
+      <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:rgba(255,255,255,0.86);"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#7FB935;color:#1F140E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;">✓</span>Influence product decisions</div>
+      <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:rgba(255,255,255,0.86);"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#7FB935;color:#1F140E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;">✓</span>Early access to testing</div>
+      <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:rgba(255,255,255,0.86);"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#7FB935;color:#1F140E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;">✓</span>Exclusive launch offers</div>
+      <div style="display:flex;align-items:flex-start;gap:11px;font-size:15px;color:rgba(255,255,255,0.86);"><span style="flex:none;width:22px;height:22px;border-radius:50%;background:#7FB935;color:#1F140E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px;">✓</span>First access when it launches</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BRAND STORY ===================== -->
+<section style="background:#FBF8F2;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;" data-storygrid="">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#E51C8D;margin-bottom:16px;">Our story</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,52px);line-height:1.04;letter-spacing:-0.02em;margin:0 0 20px;">Proudly Canadian. Built with consumers.</h2>
+      <p style="font-size:18px;line-height:1.65;color:#5A4A40;margin:0 0 18px;">At Claire Foods, we believe food innovation should begin with real consumer needs. We're building products alongside our future customers to ensure every decision — from nutrition to taste — is guided by the people who will ultimately use them.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;">
+        <span style="background:rgba(229,28,141,0.08);color:#C8147A;font-weight:700;font-size:13.5px;padding:8px 14px;border-radius:99px;">🍁 Canadian innovation</span>
+        <span style="background:rgba(127,185,53,0.14);color:#5C8F22;font-weight:700;font-size:13.5px;padding:8px 14px;border-radius:99px;">Food science</span>
+        <span style="background:rgba(42,26,18,0.06);color:#3A2A20;font-weight:700;font-size:13.5px;padding:8px 14px;border-radius:99px;">Consumer-led</span>
+      </div>
+    </div>
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;position:relative;aspect-ratio:5/4;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,#F3EBDD,#FBF8F2);border:1px solid rgba(42,26,18,0.06);">
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,rgba(42,26,18,0.04) 0 12px,transparent 12px 24px);"></div>
+      <div style="position:absolute;top:18%;left:14%;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 38% 35%,#FF66BC,#E51C8D);box-shadow:0 20px 40px -16px rgba(229,28,141,0.5);animation:floaty 7s ease-in-out infinite;"></div>
+      <div style="position:absolute;bottom:16%;right:16%;width:90px;height:90px;border-radius:0 100% 0 100%;background:linear-gradient(135deg,#A9DB5A,#6FA82B);transform:rotate(-6deg);box-shadow:0 16px 32px -14px rgba(111,168,43,0.55);animation:floaty2 8s ease-in-out infinite;"></div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;font-family:'Courier New',monospace;font-size:12px;color:#A99F92;background:rgba(255,255,255,0.7);padding:8px 12px;border-radius:8px;">[ brand imagery ]</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" style="scroll-margin-top:90px;background:#fff;padding:clamp(64px,8vw,110px) 28px;">
+  <div style="max-width:820px;margin:0 auto;">
+    <div data-reveal="" style="opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease;text-align:center;margin-bottom:44px;">
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#E51C8D;margin-bottom:16px;">Questions</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(30px,4.4vw,52px);line-height:1.04;letter-spacing:-0.02em;margin:0;">The honest answers.</h2>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <sc-for list="{{ faq }}" as="item" hint-placeholder-count="7">
+        <div style="border:1px solid rgba(42,26,18,0.1);border-radius:16px;overflow:hidden;background:#FBF8F2;">
+          <button type="button" onClick="{{ item.toggle }}" style="width:100%;text-align:left;cursor:pointer;background:transparent;border:none;padding:20px 22px;display:flex;align-items:center;justify-content:between;gap:16px;font-family:inherit;font-weight:700;font-size:17px;color:#2A1A12;justify-content:space-between;">
+            <span>{{ item.q }}</span>
+            <span style="flex:none;font-size:22px;color:#E51C8D;line-height:1;transition:transform .3s ease;transform: {{ item.iconRotate }};">+</span>
+          </button>
+          <div style="overflow:hidden;transition:max-height .4s ease,opacity .3s ease;max-height: {{ item.maxH }};opacity: {{ item.op }};">
+            <div style="padding:0 22px 22px;font-size:15.5px;line-height:1.6;color:#5A4A40;">{{ item.a }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA / WAITLIST ===================== -->
+<section id="waitlist" style="scroll-margin-top:90px;background:linear-gradient(135deg,#E51C8D 0%,#C0107A 55%,#9C0A60 100%);color:#fff;padding:clamp(64px,8vw,116px) 28px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-100px;left:-60px;width:320px;height:320px;border-radius:50%;background:rgba(255,255,255,0.12);pointer-events:none;"></div>
+  <div style="position:absolute;bottom:-120px;right:-70px;width:300px;height:300px;border-radius:0 100% 0 100%;background:rgba(169,219,90,0.28);transform:rotate(-10deg);pointer-events:none;"></div>
+  <div style="position:relative;max-width:640px;margin:0 auto;text-align:center;">
+    <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(32px,4.8vw,58px);line-height:1.02;letter-spacing:-0.02em;margin:0 0 16px;">Help shape the future of coffee creamer.</h2>
+    <p style="font-size:18px;line-height:1.6;color:rgba(255,255,255,0.9);margin:0 0 36px;">Join the Claire Foods community and influence the development of a better coffee experience.</p>
+
+    <sc-if value="{{ joined }}" hint-placeholder-val="{{ false }}">
+      <div style="background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.3);border-radius:24px;padding:40px 28px;backdrop-filter:blur(6px);">
+        <div style="width:62px;height:62px;border-radius:50%;background:#fff;color:#E51C8D;font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;">✓</div>
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:26px;margin-bottom:10px;">You're in. Welcome to ClaireFoods.</div>
+        <div style="font-size:16px;color:rgba(255,255,255,0.9);line-height:1.55;">We'll be in touch with development updates, votes that need your voice, and first access to testing. Thanks for helping shape it.</div>
+      </div>
+    </sc-if>
+    <sc-if value="{{ pending }}" hint-placeholder-val="{{ true }}">
+      <form onSubmit="{{ submit }}" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);border-radius:24px;padding:28px;backdrop-filter:blur(6px);text-align:left;">
+        <div data-formrow="" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:rgba(255,255,255,0.9);">Name</label>
+            <input type="text" onChange="{{ onName }}" placeholder="Jordan" style="width:100%;border:none;border-radius:12px;padding:14px 16px;font-family:inherit;font-size:15px;color:#2A1A12;background:#fff;outline:none;">
+          </div>
+          <div>
+            <label style="display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:rgba(255,255,255,0.9);">Email</label>
+            <input type="email" required="" onChange="{{ onEmail }}" placeholder="you@email.com" style="width:100%;border:none;border-radius:12px;padding:14px 16px;font-family:inherit;font-size:15px;color:#2A1A12;background:#fff;outline:none;">
+          </div>
+        </div>
+        <div style="margin-bottom:18px;">
+          <label style="display:block;font-size:13px;font-weight:700;margin-bottom:7px;color:rgba(255,255,255,0.9);">What would make you switch to a new coffee creamer? <span style="font-weight:500;opacity:0.7;">(optional)</span></label>
+          <textarea onChange="{{ onWhy }}" rows="3" placeholder="Tell us what would win you over…" style="width:100%;border:none;border-radius:12px;padding:14px 16px;font-family:inherit;font-size:15px;color:#2A1A12;background:#fff;outline:none;resize:vertical;"></textarea>
+        </div>
+        <button type="submit" style="width:100%;cursor:pointer;background:#1F140E;color:#fff;border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px;padding:16px;border-radius:14px;transition:transform .2s,background .2s;" style-hover="transform:translateY(-2px);background:#000">Join the Waitlist →</button>
+        <div style="text-align:center;font-size:12.5px;color:rgba(255,255,255,0.75);margin-top:14px;">No spam. Just the journey. Unsubscribe anytime.</div>
+      </form>
+    </sc-if>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer style="background:#1F140E;color:rgba(255,255,255,0.7);padding:clamp(48px,6vw,72px) 28px 36px;">
+  <div data-footergrid="" style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:start;">
+    <div>
+      <div style="display:flex;align-items:center;gap:11px;margin-bottom:16px;">
+        <img src="assets/claire-logo.png" alt="Claire Foods" style="width:38px;height:38px;">
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;color:#fff;">Claire Foods</span>
+      </div>
+      <p style="max-width:42ch;font-size:14.5px;line-height:1.6;margin:0 0 20px;">A Canadian food innovation company building better-for-you products with the people who'll use them. The coffee creamer is just the beginning.</p>
+    </div>
+    <div>
+      <div style="font-weight:700;color:#fff;font-size:15px;margin-bottom:14px;">Stay in the loop</div>
+      <sc-if value="{{ pending }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" style="display:flex;gap:8px;margin-bottom:10px;">
+          <input type="email" required onChange="{{ onEmail }}" placeholder="Your email" style="flex:1;min-width:0;border:1px solid rgba(255,255,255,0.18);background:rgba(255,255,255,0.06);border-radius:11px;padding:12px 14px;font-family:inherit;font-size:14px;color:#fff;outline:none;">
+          <button type="submit" style="flex:none;cursor:pointer;background:#E51C8D;color:#fff;border:none;font-weight:700;font-size:14px;padding:12px 18px;border-radius:11px;font-family:inherit;transition:background .2s;" style-hover="background:#C0107A">Join</button>
+        </form>
+      </sc-if>
+      <sc-if value="{{ joined }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px;background:rgba(127,185,53,0.14);border:1px solid rgba(127,185,53,0.4);border-radius:11px;padding:12px 14px;">
+          <span style="flex:none;width:22px;height:22px;border-radius:50%;background:#7FB935;color:#1F140E;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;">✓</span>
+          <span style="font-size:14px;color:#fff;font-weight:600;">You're on the list. Talk soon!</span>
+        </div>
+      </sc-if>
+      <div style="display:flex;flex-wrap:wrap;gap:18px;font-size:14px;">
+        <a href="#concept" style="color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#fff">Concept</a>
+        <a href="#survey" style="color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#fff">Survey</a>
+        <a href="#faq" style="color:rgba(255,255,255,0.7);text-decoration:none;" style-hover="color:#fff">FAQ</a>
+        <a href="#" onClick="{{ openContact }}" style="color:rgba(255,255,255,0.7);text-decoration:none;cursor:pointer;" style-hover="color:#fff">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1180px;margin:36px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.5);">
+    <div>© 2026 Claire Foods. Concept in validation — not yet available for purchase.</div>
+    <div style="display:flex;gap:18px;">
+      <a href="#" onClick="{{ openPrivacy }}" style="color:rgba(255,255,255,0.5);text-decoration:none;cursor:pointer;" style-hover="color:#fff">Privacy Policy</a>
+      <a href="#" onClick="{{ openTerms }}" style="color:rgba(255,255,255,0.5);text-decoration:none;cursor:pointer;" style-hover="color:#fff">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== LEGAL MODAL ===================== -->
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(31,20,14,0.55);backdrop-filter:blur(6px);animation:modalIn .25s ease both;">
+    <div onClick="{{ stop }}" style="position:relative;width:100%;max-width:560px;max-height:84vh;overflow-y:auto;background:#FBF8F2;border-radius:24px;padding:38px 36px 34px;box-shadow:0 40px 90px -30px rgba(31,20,14,0.6);animation:modalPop .35s cubic-bezier(.22,1,.36,1) both;">
+      <button type="button" onClick="{{ closeModal }}" aria-label="Close" style="position:absolute;top:20px;right:20px;width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;background:rgba(42,26,18,0.06);color:#2A1A12;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .2s;font-family:inherit;" style-hover="background:rgba(229,28,141,0.12)">✕</button>
+      <div style="font-weight:700;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;color:#E51C8D;margin-bottom:12px;">{{ modalKicker }}</div>
+      <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;letter-spacing:-0.02em;margin:0 0 8px;color:#2A1A12;">{{ modalTitle }}</h3>
+      <div style="font-size:13px;color:#8A7A6E;margin-bottom:22px;">{{ modalUpdated }}</div>
+      <div style="display:flex;flex-direction:column;gap:18px;">
+        <sc-for list="{{ modalSections }}" as="sec" hint-placeholder-count="4">
+          <div>
+            <div style="font-weight:700;font-size:16px;color:#2A1A12;margin-bottom:5px;">{{ sec.h }}</div>
+            <p style="font-size:15px;line-height:1.6;color:#5A4A40;margin:0;">{{ sec.p }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <button type="button" onClick="{{ closeModal }}" style="margin-top:28px;width:100%;cursor:pointer;background:#E51C8D;color:#fff;border:none;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px;padding:14px;border-radius:13px;transition:transform .2s,background .2s;" style-hover="transform:translateY(-2px);background:#C0107A">Got it</button>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;sheetEndpoint&quot;: {&quot;editor&quot;: &quot;text&quot;, &quot;default&quot;: &quot;&quot;, &quot;tsType&quot;: &quot;string&quot;},
+  &quot;proteinGrams&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 20, &quot;tsType&quot;: &quot;number&quot;, &quot;min&quot;: 5, &quot;max&quot;: 40, &quot;step&quot;: 1},
+  &quot;waitlistMembers&quot;: {&quot;editor&quot;: &quot;int&quot;, &quot;default&quot;: 4218, &quot;tsType&quot;: &quot;number&quot;, &quot;min&quot;: 0, &quot;max&quot;: 100000, &quot;step&quot;: 1},
+  &quot;reduceMotion&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;}
+}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    const seeds = {
+      matters: {protein:1342, taste:1521, sugar:898, clean:1087, sustain:756, dairy:1231},
+      flavor: {original:1412, vanilla:2587, caramel:1498, hazelnut:1376, mocha:1334},
+      pack: {a:1445, b:1392, c:987}
+    };
+    let choices = {matters:null, flavor:null, pack:null};
+    let joined = false;
+    try {
+      const raw = JSON.parse(localStorage.getItem('claire_votes') || 'null');
+      if(raw && raw.choices) choices = Object.assign(choices, raw.choices);
+      joined = localStorage.getItem('claire_joined') === '1';
+    } catch(e){}
+    this.state = { seeds, choices, joined, faqOpen:0, name:'', email:'', why:'', metric:0, modal:null };
+  }
+
+  openModal(which){ this.setState({ modal: which }); try{ document.body.style.overflow='hidden'; }catch(e){} }
+  closeModal(){ this.setState({ modal:null }); try{ document.body.style.overflow=''; }catch(e){} }
+
+  componentDidMount(){
+    this._onKey = (e)=>{ if(e.key === 'Escape' && this.state.modal) this.closeModal(); };
+    window.addEventListener('keydown', this._onKey);
+
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    if(this.props.reduceMotion){
+      els.forEach(el=>{ el.style.transition='none'; el.style.opacity='1'; el.style.transform='none'; });
+      document.querySelectorAll('[data-reveal-word]').forEach(w=>{ w.style.animation='none'; w.style.opacity='1'; w.style.transform='none'; });
+      this.setState({ metric: 1 });
+      return;
+    }
+    if('IntersectionObserver' in window){
+      const io = new IntersectionObserver((ents)=>{
+        ents.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'none';
+            io.unobserve(e.target);
+          }
+        });
+      }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+      els.forEach(el=>io.observe(el));
+    } else {
+      els.forEach(el=>{ el.style.opacity='1'; el.style.transform='none'; });
+    }
+    this._safety = setTimeout(()=>els.forEach(el=>{ el.style.opacity='1'; el.style.transform='none'; }), 2800);
+
+    this._para = Array.from(document.querySelectorAll('[data-parallax]'));
+    this._onScroll = ()=>{
+      const y = window.scrollY || 0;
+      this._para.forEach(el=>{
+        const sp = parseFloat(el.getAttribute('data-parallax')) || 0;
+        el.style.transform = 'translate3d(0,' + (y*sp) + 'px,0)';
+      });
+    };
+    window.addEventListener('scroll', this._onScroll, {passive:true});
+
+    const m = document.querySelector('[data-metrics]');
+    if(m && 'IntersectionObserver' in window){
+      const mo = new IntersectionObserver((ents)=>{
+        if(ents[0].isIntersecting){ this.runMetrics(); mo.disconnect(); }
+      }, {threshold:0.3});
+      mo.observe(m);
+    } else {
+      this.runMetrics();
+    }
+
+    this.setupInteractions();
+  }
+
+  setupInteractions(){
+    const fine = window.matchMedia && window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if(!fine) return; // skip tilt/magnetic on touch devices
+
+    // 3D tilt on cards
+    const tiltEls = Array.from(document.querySelectorAll('[data-tilt]'));
+    document.querySelectorAll('[data-tiltgroup]').forEach(g=>{
+      Array.from(g.children).forEach(c=>{ if(c.nodeType === 1) tiltEls.push(c); });
+    });
+    tiltEls.forEach(el=>{
+      el.style.willChange = 'transform';
+      el.addEventListener('mouseenter', ()=>{ el.style.transition = 'transform .12s ease-out, box-shadow .2s ease'; });
+      el.addEventListener('mousemove', (e)=>{
+        const r = el.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = 'perspective(820px) rotateX(' + (-py * 6.5).toFixed(2) + 'deg) rotateY(' + (px * 8.5).toFixed(2) + 'deg) translateY(-4px) scale(1.015)';
+      });
+      el.addEventListener('mouseleave', ()=>{ el.style.transition = 'transform .45s cubic-bezier(.22,1,.36,1), box-shadow .3s ease'; el.style.transform = ''; });
+    });
+
+    // Magnetic CTA buttons
+    document.querySelectorAll('[data-magnetic]').forEach(el=>{
+      el.style.willChange = 'transform';
+      el.addEventListener('mousemove', (e)=>{
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left - r.width / 2) * 0.32;
+        const y = (e.clientY - r.top - r.height / 2) * 0.42;
+        el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+      });
+      el.addEventListener('mouseleave', ()=>{ el.style.transform = ''; });
+    });
+  }
+
+  componentWillUnmount(){
+    if(this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if(this._onKey) window.removeEventListener('keydown', this._onKey);
+    clearTimeout(this._safety);
+  }
+
+  legalContent(){
+    const data = {
+      privacy: {
+        kicker: 'Legal', title: 'Privacy Policy', updated: 'Last updated June 2026',
+        sections: [
+          {h:'A concept, not a store', p:"Claire Foods is exploring a product concept, and this site exists to gauge interest and gather feedback — not to sell anything. This policy explains what we collect and why."},
+          {h:'What we collect', p:"Only what you choose to share: your name, email address, and any survey or poll responses. We don't sell your data or run third-party advertising trackers on this page."},
+          {h:'How we use it', p:"To send development updates, invite you to product testing, and understand which attributes matter most. Individual votes are aggregated and reported anonymously."},
+          {h:'Your choices', p:"You can unsubscribe from any email at any time, and you can ask us to delete your information by writing to privacy@clairefoods.ca."}
+        ]
+      },
+      terms: {
+        kicker: 'Legal', title: 'Terms of Use', updated: 'Last updated June 2026',
+        sections: [
+          {h:'Agreement', p:"By using this site and joining the Claire Foods community, you agree to these terms. If you don't agree, please don't submit your information."},
+          {h:'Concept only', p:"The powdered creamer described here is in validation and is not available for purchase. Nutrition figures, flavors, and packaging shown are illustrative and may change based on your feedback."},
+          {h:'Community input', p:"Ideas, votes, and comments you share may inform product development. Joining the waitlist does not guarantee a launch, specific pricing, or availability in your region."},
+          {h:'Contact', p:"Questions about these terms? Reach us any time at hello@clairefoods.ca."}
+        ]
+      },
+      contact: {
+        kicker: 'Say hello', title: 'Get in touch', updated: "We're a small team and we read everything.",
+        sections: [
+          {h:'General & feedback', p:"Email us at hello@clairefoods.ca — thoughts on the concept, flavors, or anything else are genuinely welcome."},
+          {h:'Press & partnerships', p:"For media or collaboration enquiries, reach out to hello@clairefoods.ca and we'll point you to the right person."},
+          {h:'Privacy requests', p:"To update or delete your information, write to privacy@clairefoods.ca."}
+        ]
+      }
+    };
+    return data[this.state.modal] || null;
+  }
+
+  runMetrics(){
+    const start = performance.now(), dur = 1700;
+    const tick = (now)=>{
+      let p = Math.min(1, (now - start) / dur);
+      p = 1 - Math.pow(1 - p, 3);
+      this.setState({ metric: p });
+      if(p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  vote(poll, opt){
+    // toggle off if re-clicking the current choice, otherwise switch to the new one
+    this.setState(s=>{
+      const next = s.choices[poll] === opt ? null : opt;
+      return { choices: Object.assign({}, s.choices, {[poll]: next}) };
+    }, ()=>{
+      try { localStorage.setItem('claire_votes', JSON.stringify({choices:this.state.choices})); } catch(e){}
+    });
+  }
+
+  toggleFaq(i){ this.setState(s=>({ faqOpen: s.faqOpen === i ? -1 : i })); }
+
+  submit(e){
+    if(e && e.preventDefault) e.preventDefault();
+    if(!this.state.email) return;
+    const url = this.props.sheetEndpoint;
+    if(url){
+      try {
+        const fd = new FormData();
+        fd.append('name', this.state.name || '');
+        fd.append('email', this.state.email || '');
+        fd.append('reason', this.state.why || '');
+        fd.append('source', 'clairefoods-waitlist');
+        fd.append('timestamp', new Date().toISOString());
+        fetch(url, { method: 'POST', mode: 'no-cors', body: fd }).catch(()=>{});
+      } catch(err){}
+    }
+    this.setState({ joined:true });
+    try { localStorage.setItem('claire_joined','1'); } catch(err){}
+  }
+
+  counts(poll){
+    const seed = Object.assign({}, this.state.seeds[poll]);
+    const c = this.state.choices[poll];
+    if(c && seed[c] != null) seed[c] += 1;
+    return seed;
+  }
+
+  options(poll, defs){
+    const c = this.counts(poll);
+    const total = Object.values(c).reduce((a,b)=>a+b, 0);
+    const choice = this.state.choices[poll];
+    return defs.map(d=>{
+      const count = c[d.key];
+      const pct = total ? Math.round(count / total * 100) : 0;
+      return Object.assign({}, d, {
+        count: count.toLocaleString(),
+        pct,
+        pctStr: pct + '%',
+        fillWidth: choice ? pct + '%' : '0%',
+        selected: choice === d.key,
+        voted: !!choice,
+        cardCursor: 'pointer',
+        headPad: (choice === d.key) ? '32px' : '0px',
+        vote: (()=>this.vote(poll, d.key))
+      });
+    });
+  }
+
+  faqItems(){
+    const data = [
+      {q:'Is the product available yet?', a:"Not yet. Claire's high-protein creamer is still in the concept and validation stage — it isn't for sale. Right now we're listening, testing, and refining with our early community before anything is finalized."},
+      {q:'When will it launch?', a:"We don't have a fixed date, and that's intentional. We're moving at the speed of getting it right. Waitlist members are the first to hear about testing rounds and launch timing."},
+      {q:'Is it a powder or a liquid creamer?', a:"It's a powder — and only a powder. There's no liquid version. You scoop it straight into hot or cold coffee, where it dissolves into the rich, creamy texture you'd expect. Being a powder also makes it shelf-stable, easy to store, and simple to carry to the office, the gym, or the trail."},
+      {q:'How can I influence development?', a:'Vote in the polls on this page, take the survey, and join the waitlist. Every response feeds directly into decisions on protein level, flavor, sweetness, and packaging.'},
+      {q:'What protein sources are being explored?', a:"We're evaluating clean plant proteins — including pea and fava — chosen for neutral taste, smooth texture, and a complete amino acid profile. Your feedback helps us prioritize."},
+      {q:'Will it be vegan?', a:"That's the plan. The concept is 100% plant-based and dairy-free, designed to taste rich without any animal ingredients."},
+      {q:'Will it dissolve and froth well?', a:"Dissolving cleanly is priority one — no clumps and no grit, whether you stir it into hot coffee or shake it into iced. We're also formulating for a creamy, frothable texture so your cup feels rich, not flat."},
+      {q:'How do I join product testing?', a:'Join the waitlist and tell us a little about your coffee habits. Early-access members are invited to taste tests and concept reviews as they open.'}
+    ];
+    return data.map((d,i)=>{
+      const open = this.state.faqOpen === i;
+      return Object.assign({}, d, {
+        open,
+        toggle: ()=>this.toggleFaq(i),
+        maxH: open ? '320px' : '0px',
+        op: open ? 1 : 0,
+        iconRotate: open ? 'rotate(45deg)' : 'rotate(0deg)'
+      });
+    });
+  }
+
+  renderVals(){
+    const mattersDefs = [
+      {key:'protein', label:'More protein'},
+      {key:'taste', label:'Better taste'},
+      {key:'sugar', label:'Lower sugar'},
+      {key:'clean', label:'Cleaner ingredients'},
+      {key:'sustain', label:'Sustainability'},
+      {key:'dairy', label:'Dairy-free alternatives'}
+    ];
+    const flavorDefs = [
+      {key:'original', label:'Original Cream', swatch:'#F1E6D2'},
+      {key:'vanilla', label:'Vanilla', swatch:'#EFDFA8'},
+      {key:'caramel', label:'Caramel', swatch:'#C98A4B'},
+      {key:'hazelnut', label:'Hazelnut', swatch:'#9C6B45'},
+      {key:'mocha', label:'Mocha', swatch:'#5A3A2A'}
+    ];
+    const packDefs = [
+      {key:'a', label:'The Tub', sub:'Resealable canister, scoop inside', isTub:true, isPouch:false, isSachet:false, c1:'#E51C8D', c2:'#FBE3F1'},
+      {key:'b', label:'The Pouch', sub:'Stand-up pouch, zip reseal', isTub:false, isPouch:true, isSachet:false, c1:'#7FB935', c2:'#FBF8F2'},
+      {key:'c', label:'The Sachets', sub:'Single-serve sticks, grab & go', isTub:false, isPouch:false, isSachet:true, c1:'#2A1A12', c2:'#E51C8D'}
+    ];
+    const p = this.state.metric;
+    const mfmt = (n)=>Math.round(n * p).toLocaleString();
+    const baseWaitlist = (this.props.waitlistMembers ?? 4218);
+    const grams = (this.props.proteinGrams ?? 20);
+    const legal = this.legalContent();
+    return {
+      modalOpen: !!legal,
+      modalKicker: legal ? legal.kicker : '',
+      modalTitle: legal ? legal.title : '',
+      modalUpdated: legal ? legal.updated : '',
+      modalSections: legal ? legal.sections : [],
+      openPrivacy: (e)=>{ if(e&&e.preventDefault) e.preventDefault(); this.openModal('privacy'); },
+      openTerms: (e)=>{ if(e&&e.preventDefault) e.preventDefault(); this.openModal('terms'); },
+      openContact: (e)=>{ if(e&&e.preventDefault) e.preventDefault(); this.openModal('contact'); },
+      closeModal: ()=>this.closeModal(),
+      stop: (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); },
+      matters: this.options('matters', mattersDefs),
+      flavors: this.options('flavor', flavorDefs),
+      packs: this.options('pack', packDefs),
+      faq: this.faqItems(),
+      joined: this.state.joined,
+      pending: !this.state.joined,
+      onName: (e)=>this.setState({name:e.target.value}),
+      onEmail: (e)=>this.setState({email:e.target.value}),
+      onWhy: (e)=>this.setState({why:e.target.value}),
+      submit: (e)=>this.submit(e),
+      proteinLabel: grams + 'g',
+      mWaitlist: mfmt(baseWaitlist + (this.state.joined ? 1 : 0)),
+      mSurvey: mfmt(9347),
+      mVotes: mfmt(26104)
+    };
+  }
+}
+</script>
+</body>
+</html>
